@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arayes + Blanket Dumplings — Shop &amp; Cook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    --bg:#faf7f2;
+    --card:#ffffff;
+    --ink:#1b1916;
+    --muted:#6d655c;
+    --line:#e6ded2;
+    --accent:#b4532a;
+    --accent-soft:#f6e9e1;
+    --green:#3f6b45;
+    --done:#a59b8e;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#141311;
+      --card:#1d1b18;
+      --ink:#f0ece5;
+      --muted:#a49a8d;
+      --line:#302c27;
+      --accent:#e0825a;
+      --accent-soft:#2a211c;
+      --green:#8fb894;
+      --done:#6b645b;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#141311; --card:#1d1b18; --ink:#f0ece5; --muted:#a49a8d;
+    --line:#302c27; --accent:#e0825a; --accent-soft:#2a211c; --green:#8fb894; --done:#6b645b;
+  }
+  *,*::before,*::after{box-sizing:inherit}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:16px;line-height:1.5;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:22px 16px 64px}
+  header{margin-bottom:22px}
+  h1{
+    font-family:Fraunces,Georgia,serif;font-weight:700;
+    font-size:clamp(26px,7vw,38px);line-height:1.1;margin:0 0 6px;
+    letter-spacing:-0.01em;
+  }
+  .sub{color:var(--muted);font-size:14px;margin:0}
+  .tabs{display:flex;gap:6px;margin:18px 0 20px;flex-wrap:wrap}
+  .tab{
+    flex:1 1 auto;min-width:96px;text-align:center;
+    padding:10px 12px;border-radius:999px;border:1px solid var(--line);
+    background:var(--card);color:var(--muted);font-size:14px;font-weight:600;
+    cursor:pointer;font-family:inherit;
+  }
+  .tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .panel[hidden]{display:none}
+  section.card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:16px 16px 6px;margin-bottom:14px;
+  }
+  section.card.tight{padding-bottom:16px}
+  h2{
+    font-family:Fraunces,Georgia,serif;font-size:19px;margin:0 0 2px;font-weight:600;
+  }
+  h2 .where{display:block;font-family:Inter,sans-serif;font-size:12.5px;font-weight:500;color:var(--accent);letter-spacing:.02em;text-transform:uppercase;margin-top:4px}
+  ul.items{list-style:none;margin:12px 0 0;padding:0}
+  ul.items li{border-top:1px solid var(--line)}
+  label.item{
+    display:flex;gap:12px;align-items:flex-start;
+    padding:11px 2px;cursor:pointer;
+  }
+  label.item input{
+    appearance:none;-webkit-appearance:none;
+    width:21px;height:21px;flex:0 0 21px;margin:1px 0 0;
+    border:1.8px solid var(--line);border-radius:6px;background:transparent;cursor:pointer;
+  }
+  label.item input:checked{background:var(--green);border-color:var(--green)}
+  label.item input:checked::after{
+    content:"";display:block;width:5px;height:10px;margin:2.5px auto 0;
+    border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);
+  }
+  .nm{font-weight:500}
+  .qty{color:var(--muted);font-size:13.5px;display:block;margin-top:1px}
+  label.item input:checked ~ .txt .nm,
+  label.item input:checked ~ .txt .qty{color:var(--done);text-decoration:line-through}
+  .tag{
+    display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.04em;
+    padding:2px 7px;border-radius:5px;margin-left:6px;vertical-align:1px;
+    background:var(--accent-soft);color:var(--accent);text-transform:uppercase;
+  }
+  .tag.both{background:var(--green);color:#fff}
+  .note{
+    background:var(--accent-soft);border-radius:12px;padding:13px 14px;
+    font-size:14px;color:var(--ink);margin:0 0 14px;
+  }
+  .note strong{color:var(--accent)}
+  ol.steps{margin:12px 0 10px;padding-left:20px}
+  ol.steps li{margin-bottom:11px}
+  ol.steps li::marker{color:var(--accent);font-weight:700}
+  .sub-h{font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:16px 0 0}
+  .plainlist{margin:6px 0 0;padding-left:18px;color:var(--ink)}
+  .plainlist li{margin-bottom:4px}
+  .timeline{list-style:none;padding:0;margin:12px 0 4px}
+  .timeline li{display:flex;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
+  .timeline li:first-child{border-top:0}
+  .clock{flex:0 0 74px;font-size:12.5px;font-weight:600;color:var(--accent);padding-top:2px}
+  .reset{
+    display:block;width:100%;margin-top:10px;padding:11px;
+    background:transparent;border:1px solid var(--line);border-radius:10px;
+    color:var(--muted);font-family:inherit;font-size:13.5px;cursor:pointer;
+  }
+  .footnote{color:var(--muted);font-size:13px;margin-top:18px}
+  figure.fig{
+    margin:12px 0 4px;padding:14px 10px 10px;
+    background:var(--accent-soft);border-radius:12px;
+  }
+  figure.fig svg{width:100%;height:auto;display:block}
+  figure.fig figcaption{
+    font-size:12.5px;color:var(--muted);margin-top:9px;text-align:center;line-height:1.4;
+  }
+  .ln{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .ac{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  .dsh{fill:none;stroke:var(--muted);stroke-width:1.6;stroke-dasharray:4 4;stroke-linecap:round}
+  .lbl{fill:var(--muted);font:600 11.5px Inter,-apple-system,sans-serif;text-anchor:middle}
+  .lbl-s{fill:var(--muted);font:500 10px Inter,-apple-system,sans-serif;text-anchor:middle}
+  .stop{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.07em;text-transform:uppercase;margin:0 0 4px}
+  .meta{font-size:12.5px;color:var(--muted);margin:4px 0 0;line-height:1.45}
+  .meta b{color:var(--ink);font-weight:600}
+  h2 .dist{display:block;font-family:Inter,sans-serif;font-size:12.5px;font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0;margin-top:3px}
+  .buy{margin:11px 0 0;padding-left:18px}
+  .buy li{margin-bottom:3px;font-size:14.5px}
+  .phase{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);
+    margin:0 0 3px}
+  ol.run{margin:10px 0 4px;padding-left:22px}
+  ol.run>li{margin-bottom:13px;font-size:15px;line-height:1.5}
+  ol.run>li::marker{color:var(--accent);font-weight:700}
+  .mix{display:block;background:var(--accent-soft);border-radius:10px;padding:12px 14px;
+    margin:10px 0 2px;overflow-wrap:break-word}
+  .mix .hd{display:block;font-weight:700;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:8px}
+  .mix ul{list-style:none;margin:0;padding:0}
+  .mix li{font-size:14.5px;line-height:1.45;padding:4px 0;border-top:1px solid var(--line)}
+  .mix li:first-child{border-top:0}
+  ol.run>li{overflow-wrap:break-word}
+  .timer{display:inline-block;background:var(--accent);color:#fff;border-radius:6px;
+    padding:1px 7px;font-size:12.5px;font-weight:700;margin:0 2px}
+  b.q{font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+  .scaler{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 14px 13px;margin-bottom:16px}
+  .srow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0}
+  .srow+.srow{border-top:1px solid var(--line)}
+  .sname{font-weight:600;font-size:14.5px;line-height:1.3}
+  .sname em{display:block;font-size:12px;color:var(--muted);font-weight:400;font-style:normal;margin-top:1px}
+  .sctl{display:flex;align-items:center;gap:5px;flex:0 0 auto}
+  .sctl button{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:transparent;
+    color:var(--ink);font-size:19px;font-family:inherit;cursor:pointer;line-height:1;padding:0}
+  .sctl button:active{background:var(--accent-soft)}
+  .sval{min-width:58px;text-align:center;font-size:14px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+  .sfeed{margin:11px 0 0;padding-top:11px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted);line-height:1.55}
+  .sfeed b{color:var(--ink)}
+  .sfeed+.sfeed{border-top:0;padding-top:6px;margin-top:0}
+  figure.hero{margin:0 0 16px;border-radius:16px;overflow:hidden;line-height:0;
+    box-shadow:0 2px 14px rgba(0,0,0,.14)}
+  figure.hero svg{width:100%;height:auto;display:block}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Arayes &amp; Blanket Dumplings</h1>
+  <p class="sub">One shop, one cook session. Serves 3–4 of each.</p>
+</header>
+
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-panel="cook">Start cooking</button>
+  <button class="tab" role="tab" aria-selected="false" data-panel="shop">Shopping</button>
+  <button class="tab" role="tab" aria-selected="false" data-panel="arayes">Arayes</button>
+  <button class="tab" role="tab" aria-selected="false" data-panel="dump">Dumplings</button>
+  <button class="tab" role="tab" aria-selected="false" data-panel="where">Where to buy</button>
+  <button class="tab" role="tab" aria-selected="false" data-panel="plan">Cook plan</button>
+</div>
+
+<div class="scaler">
+  <div class="srow">
+    <span class="sname">Arayes<em id="a-sub">8 halves</em></span>
+    <span class="sctl"><button data-r="a" data-d="-1" aria-label="fewer pitas">−</button><span class="sval" id="a-val">4</span><button data-r="a" data-d="1" aria-label="more pitas">+</button></span>
+  </div>
+  <div class="srow">
+    <span class="sname">Dumplings<em id="d-sub">2 lb of filling</em></span>
+    <span class="sctl"><button data-r="d" data-d="-4" aria-label="fewer dumplings">−</button><span class="sval" id="d-val">40</span><button data-r="d" data-d="4" aria-label="more dumplings">+</button></span>
+  </div>
+  <p class="sfeed" id="feed1"></p>
+  <p class="sfeed" id="feed2"></p>
+</div>
+
+<!-- ============ COOK ============ -->
+<div class="panel" id="cook">
+  <p class="note"><strong>Both dishes, one run.</strong> Roughly 70 minutes. The arayes go in the oven and free your hands for exactly the time the dumplings need. Quantities below follow the scaler above.</p>
+
+  <section class="card">
+    <p class="phase">Tonight, actual numbers</p>
+    <h2>What's in front of you</h2>
+    <ul class="plainlist">
+      <li><strong>11 arayes halves.</strong> Skillet: 3 rounds of 4, 4, 3 — medium, 2 min per side, three sides each. Or air fryer: 3 rounds at 360&nbsp;°F, 10 min, flip at 5. Then all 11 on one sheet pan at 350&nbsp;°F for 15 min, pull at 155&nbsp;°F.</li>
+      <li><strong>21 dumplings across two pans, both on medium.</strong>
+        <ul class="plainlist" style="margin-top:5px">
+          <li>Pan of <strong>8</strong> — 3 tbsp broth, lid on, <strong>10 min</strong></li>
+          <li>Pan of <strong>13</strong> — ¼ cup broth, lid on, <strong>12 min</strong>; a crowded pan runs slower</li>
+        </ul>
+        Check one from each at <strong>160&nbsp;°F</strong>. Lid back on for 2 more if either is short.
+      </li>
+      <li><strong>Bouillon:</strong> half a cube dissolved in ½ cup hot water covers both pans. Split it 3 tbsp and 4 tbsp.</li>
+      <li>The steps below still hold — these are just your counts instead of the defaults.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <p class="phase">First — 2 minutes</p>
+    <h2>Set up</h2>
+    <ol class="run">
+      <li>Oven to <strong>350&nbsp;°F</strong>.</li>
+      <li>Yogurt into a paper-towel-lined sieve set over a bowl, into the fridge. Strain about a cup to end up with <b class="q" data-r="a" data-b="0.75">¾</b>. Skip if you bought Greek.</li>
+      <li>Two skillets on the stove, a sheet pan on the counter.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <p class="phase">Prep — 20 minutes</p>
+    <h2>Knife work, all of it now</h2>
+    <ol class="run" start="4">
+      <li><strong>Onion.</strong> Half a large one, or one small. Rub the cut face on the <strong>large holes</strong> of a box grater until you reach your knuckles. Squeeze the pulp hard over the sink, bin the liquid. You want about <strong>2–3 tbsp</strong> of damp pulp left.</li>
+      <li><strong>Jalapeño</strong> — same grater, no squeezing.</li>
+      <li>Chop the parsley and cilantro. Slice the green onions.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <p class="phase">Mix — 5 minutes</p>
+    <h2>Two bowls</h2>
+    <ol class="run" start="7">
+      <li>
+        <strong>Arayes meat.</strong> Mix with your hands until tacky, about a minute.
+        <span class="mix"><span class="hd">Bowl 1 — arayes</span>
+          <ul>
+            <li><b class="q" data-r="a" data-b="1">1</b> lb ground beef</li>
+            <li>The squeezed onion pulp</li>
+            <li>The grated jalapeño</li>
+            <li><b class="q" data-r="a" data-b="2.5">2½</b> tsp garlic paste</li>
+            <li><b class="q" data-r="a" data-b="2">2</b> tbsp tomato paste</li>
+            <li><b class="q" data-r="a" data-b="0.3333">⅓</b> cup chopped parsley</li>
+            <li><b class="q" data-r="a" data-b="0.25">¼</b> cup chopped cilantro</li>
+            <li><b class="q" data-r="a" data-b="1">1</b> tbsp olive oil</li>
+            <li><b class="q" data-r="a" data-b="1">1</b> tsp salt</li>
+            <li><b class="q" data-r="a" data-b="1">1</b> tsp black pepper</li>
+            <li><b class="q" data-r="a" data-b="2">2</b> tsp cumin</li>
+            <li><b class="q" data-r="a" data-b="2">2</b> tsp paprika</li>
+            <li><b class="q" data-r="a" data-b="1">1</b> tsp allspice</li>
+            <li><b class="q" data-r="a" data-b="1">1</b> tsp ground coriander</li>
+            <li><b class="q" data-r="a" data-b="1">1</b> tsp garlic powder</li>
+            <li><b class="q" data-r="a" data-b="0.25">¼</b> tsp cinnamon</li>
+          </ul>
+        </span>
+      </li>
+      <li>
+        <strong>Dumpling filling.</strong> Mix <em>just</em> until combined — overworked beef turns rubbery. This is the opposite of bowl 1.
+        <span class="mix"><span class="hd">Bowl 2 — dumplings</span>
+          <ul>
+            <li><b class="q" data-r="d" data-b="1">1</b> lb ground beef</li>
+            <li><b class="q" data-r="d" data-b="0.3333">⅓</b> cup sliced green onions</li>
+            <li><b class="q" data-r="d" data-b="1">1</b> tbsp ginger paste</li>
+            <li><b class="q" data-r="d" data-b="2">2</b> tsp garlic paste</li>
+            <li><b class="q" data-r="d" data-b="1">1</b> tbsp oyster sauce</li>
+            <li><b class="q" data-r="d" data-b="1">1</b> tsp black pepper</li>
+            <li><b class="q" data-r="d" data-b="2">2</b> tbsp chili crisp</li>
+            <li><b class="q" data-r="d" data-b="3">3</b> tbsp soy sauce</li>
+            <li><b class="q" data-r="d" data-b="1.5">1½</b> tsp sesame oil</li>
+            <li><b class="q" data-r="d" data-b="1">1</b> tbsp rice vinegar</li>
+          </ul>
+        </span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <p class="phase">Shape — 20 minutes</p>
+    <h2>Stuff and drape</h2>
+    <ol class="run" start="9">
+      <li>Cut <b class="q" data-r="a" data-b="4" data-i="1">4</b> pitas in half. Microwave <span class="timer">10 sec</span> so the pockets open without tearing. Spread a <strong>thin</strong> layer of meat inside each of the <span id="ck-halves">8</span> halves — ¼ inch maximum. Brush both outer faces with olive oil.</li>
+      <li>Scoop <b class="q" data-r="d" data-b="20" data-i="1">20</b> mounds of filling onto sheet pans, a rounded tablespoon each, two inches apart. Drape a wrapper over each and pinch down around the base. Damp paper towel over the lot while you work.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <p class="phase">Cook — 25 minutes, both pans</p>
+    <h2>Sear, bake, steam</h2>
+    <ol class="run" start="11">
+      <li><strong>Skillet A — arayes. Medium heat, dial at the halfway mark. Dry pan, no oil</strong> (they're already brushed).
+        <ul class="plainlist" style="margin-top:7px">
+          <li>Cut edge down first — <span class="timer">2 min</span>, until properly charred</li>
+          <li>Flip onto one flat face — <span class="timer">2 min</span></li>
+          <li>Flip to the other face — <span class="timer">2 min</span></li>
+        </ul>
+        Six minutes a round, 4 halves at a time. <span id="ck-sear">Two rounds</span> to get through them all. Onto the sheet pan as they finish.
+      </li>
+      <li><strong>Into the oven</strong> — all the halves on one pan, <span class="timer">15 min</span>, until the meat reads <strong>155&nbsp;°F</strong>.</li>
+      <li><strong>Skillet B — dumplings. Medium heat, halfway on the dial.</strong> Run this while the oven does the arayes.
+        <ul class="plainlist" style="margin-top:7px">
+          <li>Drizzle oil in the cold pan, arrange <span id="ck-per">10</span> dumplings</li>
+          <li>Pour <strong>¼ cup broth</strong> around them, not over them</li>
+          <li><strong>Lid on</strong> — <span class="timer">10 min</span>. Don't lift it before 8, you lose all the steam</li>
+          <li>Check one: <strong>160&nbsp;°F</strong>. Not there? Lid back on, 2 more minutes</li>
+          <li><em>Optional:</em> once the liquid has cooked off, lid off, medium-high, <span class="timer">2 min</span> for crisp bottoms</li>
+        </ul>
+      </li>
+      <li><strong>Side task while you wait.</strong> In a small bowl stir together <b class="q" data-r="a" data-b="2">2</b> tbsp olive oil, <b class="q" data-r="a" data-b="1">1</b> tsp garlic paste and a pinch of chopped parsley. This gets brushed on the arayes the moment they leave the oven — nothing to do with the dumplings.</li>
+      <li>
+        <strong>Whisk the dipping sauce.</strong> Loosen with a spoonful of water at a time if it's too thick to dip.
+        <span class="mix"><span class="hd">Bowl 3 — tahini yogurt sauce</span>
+          <ul>
+            <li>The strained yogurt (<b class="q" data-r="a" data-b="0.75">¾</b> cup)</li>
+            <li><b class="q" data-r="a" data-b="0.25">¼</b> cup tahini</li>
+            <li><b class="q" data-r="a" data-b="2">2</b> tsp garlic paste</li>
+            <li>Juice of <b class="q" data-r="a" data-b="0.5">½</b> lemon</li>
+            <li><b class="q" data-r="a" data-b="1">1</b> tbsp olive oil</li>
+            <li><b class="q" data-r="a" data-b="0.5">½</b> tsp salt</li>
+            <li><b class="q" data-r="a" data-b="0.25">¼</b> tsp cumin</li>
+            <li><b class="q" data-r="a" data-b="2">2</b> tbsp parsley + <b class="q" data-r="a" data-b="2">2</b> tbsp cilantro</li>
+          </ul>
+        </span>
+      </li>
+      <li><strong>Arayes out</strong> at 155&nbsp;°F. Brush with the garlic-parsley finishing oil <em>while they're still hot</em> — that's when they drink it in. Serve with the tahini yogurt sauce for dipping. This oil is for the arayes only; it never goes near the dumplings.</li>
+      <li><strong>Dumplings out.</strong> Top in this order, straight in the pan:
+        <ul class="plainlist" style="margin-top:7px">
+          <li><strong>Soy sauce</strong> — 1–2 tsp drizzled over the whole pan. Go light, the filling is already salty</li>
+          <li><strong>Chili crisp</strong> — a heaped spoonful. Stir the jar first so you get the crunchy bits, not just the oil off the top</li>
+          <li><strong>Green onions</strong> — scattered</li>
+          <li><strong>Sesame seeds</strong> — a pinch over everything</li>
+        </ul>
+        <strong>No extra oil at this stage.</strong> No sesame oil, no olive oil — the chili crisp brings its own. Serve with rice.
+      </li>
+      <li><span id="ck-rest">Run the second batch</span> — fresh ¼ cup broth each time, wipe the pan if it's gone sticky.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <p class="phase">Alternative</p>
+    <h2>Air fryer — arayes only</h2>
+    <p class="meta">This replaces the skillet <em>and</em> the oven. Faster, less washing up, and the pita crisps more evenly.</p>
+    <ul class="plainlist">
+      <li><strong>360&nbsp;°F, 10 minutes, flip at the 5-minute mark.</strong></li>
+      <li>Four halves per go, max. Crowding steams them instead of crisping them.</li>
+      <li>Pull at <strong>155&nbsp;°F</strong> internal, then brush with the finishing oil.</li>
+      <li>No preheat needed for these.</li>
+    </ul>
+    <p class="meta"><strong>Don't air-fry the dumplings.</strong> The wrapper needs wet steam to cook through — dry heat splits it and the dough goes leathery. Those stay in the covered skillet.</p>
+  </section>
+
+  <section class="card tight">
+    <h2>The three things that go wrong</h2>
+    <ul class="plainlist">
+      <li><strong>Wet onion.</strong> If it drips, it wasn't squeezed enough, and the pita goes soggy from the inside.</li>
+      <li><strong>Too much meat in the pita.</strong> Thicker than ¼ inch and the bread burns before the centre cooks.</li>
+      <li><strong>Overmixed dumpling filling.</strong> Stop the second it comes together.</li>
+    </ul>
+  </section>
+</div>
+
+<!-- ============ SHOPPING ============ -->
+<div class="panel" id="shop" hidden>
+
+  <p class="note"><strong>Honest read:</strong> these two recipes still barely overlap. <strong>Ground beef, garlic, salt and black pepper</strong> cross both — everything else is separate. The real savings are <em>within</em> each recipe: garlic and herbs get used two or three times in the arayes, and soy sauce, chili crisp and green onion go in the dumpling filling <em>and</em> on top. Buy for the total, not per recipe.</p>
+
+  <p class="note"><strong>No pork anywhere:</strong> both recipes run on beef now. Two labels worth reading — some <strong>chili crisp</strong> brands add pork fat or crispy pork bits (Lao Gan Ma and Fly By Jing don't), and a few <strong>dumpling wrapper</strong> brands use lard instead of oil. Plain flour-and-water wrappers are the safe pick, and every store below sells halal.</p>
+
+  <p class="note" style="font-size:13.5px"><strong>Your ticks are saved on this device.</strong> They stay put when the page is updated and when quantities change — nothing here clears them except the button at the bottom of the list.</p>
+
+  <section class="card tight" id="scaledbox">
+    <h2>Quantities at your current scale</h2>
+    <ul class="plainlist" id="scaled-list"></ul>
+  </section>
+
+  <section class="card">
+    <h2>Produce<span class="where">Any supermarket</span></h2>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox" data-k="garlic"><span class="txt"><span class="nm">Garlic<span class="tag both">both</span></span><span class="qty" id="garlic-shop">—</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="parsley"><span class="txt"><span class="nm">Flat-leaf parsley</span><span class="qty" id="parsley-shop">—</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="cilantro"><span class="txt"><span class="nm">Cilantro</span><span class="qty">1 bunch — ¼ cup meat, 2 tbsp sauce</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="green-onions"><span class="txt"><span class="nm">Green onions</span><span class="qty" id="scallion-shop">—</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="yellow-onion"><span class="txt"><span class="nm">Yellow onion</span><span class="qty">1 small</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="jalapeno"><span class="txt"><span class="nm">Jalapeño</span><span class="qty">1</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="ginger"><span class="txt"><span class="nm">Fresh ginger</span><span class="qty">1 small knob — need 1 tbsp grated</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="lemon"><span class="txt"><span class="nm">Lemon</span><span class="qty">1</span></span></label></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Meat counter<span class="where">Jetro · or Minar Halal Meat for fresh-ground</span></h2>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox" data-k="ground-beef"><span class="txt"><span class="nm">Ground beef, 85/15<span class="tag both">both</span></span><span class="qty" id="beef-qty">—</span></span></label></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Refrigerated<span class="where">Jetro for yogurt · Asian Food Market for wrappers</span></h2>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox" data-k="greek-yogurt"><span class="txt"><span class="nm">Greek yogurt, whole milk</span><span class="qty" id="yog-shop">—</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="dumpling-wrappers"><span class="txt"><span class="nm">Dumpling wrappers<span class="tag">tricky</span></span><span class="qty" id="wrap-shop">—</span></span></label></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Bakery<span class="where">Cairo Market · Jetro's bread aisle is a maybe</span></h2>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox" data-k="pita"><span class="txt"><span class="nm">Pita with pockets<span class="tag">tricky</span></span><span class="qty" id="pita-shop">—</span></span></label></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Asian aisle<span class="where">Jetro for most · Asian Food Market on Rt&nbsp;440 for the rest</span></h2>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox" data-k="soy-sauce"><span class="txt"><span class="nm">Soy sauce</span><span class="qty" id="soy-shop">—</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="chili-crisp"><span class="txt"><span class="nm">Chili crisp</span><span class="qty" id="crisp-shop">—</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="oyster-sauce"><span class="txt"><span class="nm">Oyster sauce</span><span class="qty">1 tbsp — Lee Kum Kee</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="sesame-oil"><span class="txt"><span class="nm">Toasted sesame oil</span><span class="qty">1½ tsp — dark/toasted, not plain</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="rice-vinegar"><span class="txt"><span class="nm">Rice vinegar</span><span class="qty">1 tbsp — unseasoned</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="sesame-seeds"><span class="txt"><span class="nm">Sesame seeds</span><span class="qty">White, toasted — for topping</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="rice"><span class="txt"><span class="nm">Rice</span><span class="qty">To serve with the dumplings</span></span></label></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Pantry<span class="where">Jetro · Cairo Market for tahini</span></h2>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox" data-k="tahini"><span class="txt"><span class="nm">Tahini</span><span class="qty" id="tah-shop">—</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="tomato-paste"><span class="txt"><span class="nm">Tomato paste</span><span class="qty">2 tbsp — buy the tube, not the can, so the rest doesn't rot</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="olive-oil"><span class="txt"><span class="nm">Olive oil</span><span class="qty">Meat mix, brushing the pitas, the sauce, the finishing oil</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="avocado-oil"><span class="txt"><span class="nm">Avocado oil</span><span class="qty">For the dumpling pan — any neutral high-heat oil works</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="chicken-broth"><span class="txt"><span class="nm">Chicken broth</span><span class="qty">¼ cup — smallest carton, or a bouillon cube</span></span></label></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Spice rack — check before you buy<span class="where">Jetro in bulk · Patel Brothers in normal-sized bags</span></h2>
+    <ul class="items">
+      <li><label class="item"><input type="checkbox" data-k="cumin"><span class="txt"><span class="nm">Cumin</span><span class="qty">2 tsp meat + ¼ tsp sauce</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="paprika"><span class="txt"><span class="nm">Paprika</span><span class="qty">2 tsp — sweet, not smoked</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="allspice"><span class="txt"><span class="nm">Allspice</span><span class="qty">1 tsp — this is the one people don't have</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="coriander"><span class="txt"><span class="nm">Ground coriander</span><span class="qty">1 tsp</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="garlic-powder"><span class="txt"><span class="nm">Garlic powder</span><span class="qty">1 tsp</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="cinnamon"><span class="txt"><span class="nm">Cinnamon</span><span class="qty">¼ tsp</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="black-pepper"><span class="txt"><span class="nm">Black pepper<span class="tag both">both</span></span><span class="qty">1 tsp each recipe</span></span></label></li>
+      <li><label class="item"><input type="checkbox" data-k="salt"><span class="txt"><span class="nm">Salt<span class="tag both">both</span></span><span class="qty">Kosher</span></span></label></li>
+    </ul>
+    <button class="reset" id="reset">Uncheck everything</button>
+  </section>
+
+  <section class="card tight">
+    <h2>Where to go, in order</h2>
+    <ul class="plainlist">
+      <li><strong>One big supermarket</strong> gets you ~90% of this in a single trip.</li>
+      <li><strong>Asian grocer</strong> (H Mart, 99 Ranch, Patel-style corner shop) — go here for the wrappers, chili crisp, oyster sauce, sesame oil, rice vinegar. Same brands, roughly half the supermarket price.</li>
+      <li><strong>Middle Eastern grocer</strong> — real pocket pita, good tahini, and spices sold in bags instead of $6 jars. Allspice and cumin alone justify the stop.</li>
+      <li><strong>Online</strong> if you're short on time: Fly By Jing chili crisp and Soom tahini both ship direct; Weee! or Amazon Fresh carry dumpling wrappers in most metros.</li>
+    </ul>
+  </section>
+</div>
+
+<!-- ============ ARAYES ============ -->
+<div class="panel" id="arayes" hidden>
+  <figure class="hero">
+    <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Charred arayes wedges on a plate with a bowl of garlic tahini yogurt sauce, lemon and parsley">
+      <defs>
+        <linearGradient id="abg" x1="0" y1="0" x2="0.3" y2="1">
+          <stop offset="0" stop-color="#f7e9d5"/><stop offset="1" stop-color="#ddbb95"/>
+        </linearGradient>
+        <radialGradient id="aglow" cx="0.44" cy="0.3" r="0.72">
+          <stop offset="0" stop-color="#fffaf0" stop-opacity="0.9"/>
+          <stop offset="1" stop-color="#fffaf0" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="pita" x1="0.1" y1="0" x2="0.4" y2="1">
+          <stop offset="0" stop-color="#eccb9a"/><stop offset="0.6" stop-color="#d7a86b"/><stop offset="1" stop-color="#bd8a4c"/>
+        </linearGradient>
+        <linearGradient id="meat" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#83452a"/><stop offset="1" stop-color="#4a2113"/>
+        </linearGradient>
+        <clipPath id="wedgeclip"><path d="M -70 0 Q -70 -58 0 -63 Q 70 -58 70 0 Z"/></clipPath>
+      </defs>
+
+      <rect width="720" height="300" fill="url(#abg)"/>
+      <rect width="720" height="300" fill="url(#aglow)"/>
+
+      <ellipse cx="362" cy="176" rx="258" ry="123" fill="#8a6338" opacity="0.16"/>
+      <ellipse cx="360" cy="164" rx="258" ry="123" fill="#fdfaf3"/>
+      <ellipse cx="360" cy="164" rx="258" ry="123" fill="none" stroke="#e0d2bc" stroke-width="2"/>
+      <ellipse cx="360" cy="167" rx="215" ry="99" fill="#f6efe2"/>
+
+      <g transform="translate(152,116) rotate(-16)">
+        <path d="M -33 12 A 33 33 0 0 1 33 12 Z" fill="#f6d34e"/>
+        <path d="M -8 12 L -8 -19 M 10 12 L 12 -18 M -24 12 L -20 -11 M 26 12 L 22 -10" stroke="#fdf0a8" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+        <path d="M -33 12 A 33 33 0 0 1 33 12 Z" fill="none" stroke="#d8ab2c" stroke-width="2.5"/>
+      </g>
+
+      <g transform="translate(570,102)">
+        <ellipse cx="2" cy="10" rx="62" ry="34" fill="#8a6338" opacity="0.16"/>
+        <ellipse cx="0" cy="0" rx="62" ry="35" fill="#fefcf7"/>
+        <ellipse cx="0" cy="1" rx="52" ry="28" fill="#eee7d8"/>
+        <ellipse cx="0" cy="2" rx="47" ry="24" fill="#faf6ec"/>
+        <path d="M -30 -3 q 14 -11 30 -3 q 15 8 27 -3" stroke="#c6a848" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/>
+        <circle cx="-24" cy="8" r="2.6" fill="#4d7a3b"/><circle cx="-7" cy="13" r="2.2" fill="#3d6a44"/>
+        <circle cx="13" cy="7" r="2.4" fill="#5c8b46"/><circle cx="28" cy="12" r="2" fill="#4d7a3b"/>
+        <circle cx="3" cy="-9" r="2" fill="#5c8b46"/><circle cx="-16" cy="-6" r="1.8" fill="#3d6a44"/>
+      </g>
+
+      <g transform="translate(214,206) rotate(-7)">
+        <ellipse cx="4" cy="8" rx="74" ry="13" fill="#8a6338" opacity="0.22"/>
+        <g clip-path="url(#wedgeclip)">
+          <path d="M -70 0 Q -70 -58 0 -63 Q 70 -58 70 0 Z" fill="url(#pita)"/>
+          <ellipse cx="-32" cy="-40" rx="21" ry="11" fill="#9a672f" opacity="0.5"/>
+          <ellipse cx="20" cy="-49" rx="26" ry="9" fill="#87551f" opacity="0.45"/>
+          <ellipse cx="48" cy="-22" rx="15" ry="10" fill="#7a481c" opacity="0.4"/>
+          <ellipse cx="-14" cy="-16" rx="30" ry="8" fill="#b07c45" opacity="0.3"/>
+          <path d="M -70 -11 L 70 -11 L 70 2 L -70 2 Z" fill="url(#meat)"/>
+          <path d="M -52 -8 q 12 -4 22 0 q 12 4 24 0 q 12 -4 22 0" stroke="#2f1409" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.55"/>
+        </g>
+        <path d="M -70 0 Q -70 -58 0 -63 Q 70 -58 70 0 Z" fill="none" stroke="#a5713a" stroke-width="2"/>
+      </g>
+
+      <g transform="translate(364,188) rotate(4)">
+        <ellipse cx="4" cy="8" rx="74" ry="13" fill="#8a6338" opacity="0.22"/>
+        <g clip-path="url(#wedgeclip)">
+          <path d="M -70 0 Q -70 -58 0 -63 Q 70 -58 70 0 Z" fill="url(#pita)"/>
+          <ellipse cx="26" cy="-42" rx="23" ry="11" fill="#9a672f" opacity="0.5"/>
+          <ellipse cx="-24" cy="-50" rx="24" ry="9" fill="#87551f" opacity="0.45"/>
+          <ellipse cx="-50" cy="-24" rx="15" ry="10" fill="#7a481c" opacity="0.4"/>
+          <ellipse cx="10" cy="-16" rx="32" ry="8" fill="#b07c45" opacity="0.3"/>
+          <path d="M -70 -11 L 70 -11 L 70 2 L -70 2 Z" fill="url(#meat)"/>
+          <path d="M -50 -8 q 12 -4 22 0 q 12 4 24 0 q 12 -4 22 0" stroke="#2f1409" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.55"/>
+        </g>
+        <path d="M -70 0 Q -70 -58 0 -63 Q 70 -58 70 0 Z" fill="none" stroke="#a5713a" stroke-width="2"/>
+      </g>
+
+      <g transform="translate(510,208) rotate(13)">
+        <ellipse cx="4" cy="8" rx="74" ry="13" fill="#8a6338" opacity="0.22"/>
+        <g clip-path="url(#wedgeclip)">
+          <path d="M -70 0 Q -70 -58 0 -63 Q 70 -58 70 0 Z" fill="url(#pita)"/>
+          <ellipse cx="-36" cy="-44" rx="20" ry="11" fill="#9a672f" opacity="0.5"/>
+          <ellipse cx="16" cy="-50" rx="26" ry="9" fill="#87551f" opacity="0.45"/>
+          <ellipse cx="46" cy="-26" rx="16" ry="10" fill="#7a481c" opacity="0.4"/>
+          <ellipse cx="-6" cy="-16" rx="30" ry="8" fill="#b07c45" opacity="0.3"/>
+          <path d="M -70 -11 L 70 -11 L 70 2 L -70 2 Z" fill="url(#meat)"/>
+          <path d="M -52 -8 q 12 -4 22 0 q 12 4 24 0 q 12 -4 22 0" stroke="#2f1409" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.55"/>
+        </g>
+        <path d="M -70 0 Q -70 -58 0 -63 Q 70 -58 70 0 Z" fill="none" stroke="#a5713a" stroke-width="2"/>
+      </g>
+
+      <g fill="#4e7c3f">
+        <path d="M 0 0 q 9 -7 18 0 q -9 7 -18 0 Z" transform="translate(238,138) rotate(-24)"/>
+        <path d="M 0 0 q 9 -7 18 0 q -9 7 -18 0 Z" transform="translate(432,146) rotate(36)" fill="#3f6b45"/>
+        <path d="M 0 0 q 9 -7 18 0 q -9 7 -18 0 Z" transform="translate(300,246) rotate(14)" fill="#5b8a45"/>
+        <path d="M 0 0 q 9 -7 18 0 q -9 7 -18 0 Z" transform="translate(468,252) rotate(-40)"/>
+        <path d="M 0 0 q 9 -7 18 0 q -9 7 -18 0 Z" transform="translate(178,182) rotate(58)" fill="#3f6b45"/>
+        <path d="M 0 0 q 9 -7 18 0 q -9 7 -18 0 Z" transform="translate(614,196) rotate(-12)" fill="#5b8a45"/>
+      </g>
+    </svg>
+  </figure>
+  <section class="card">
+    <h2>Arayes — meat mixture</h2>
+    <ul class="plainlist">
+      <li><b class="q" data-r="a" data-b="1">1</b> lb ground beef (85/15)</li>
+      <li><b class="q" data-r="a" data-b="1" data-i="1">1</b> small yellow onion, grated and squeezed dry <em>(half a large one)</em></li>
+      <li><b class="q" data-r="a" data-b="5" data-i="1">5</b> garlic cloves, finely grated <em>— or <b class="q" data-r="a" data-b="2.5">2½</b> tsp garlic paste</em></li>
+      <li><b class="q" data-r="a" data-b="1" data-i="1">1</b> jalapeño, grated</li>
+      <li><b class="q" data-r="a" data-b="2">2</b> tbsp tomato paste</li>
+      <li><b class="q" data-r="a" data-b="0.3333">⅓</b> cup parsley, finely chopped</li>
+      <li><b class="q" data-r="a" data-b="0.25">¼</b> cup cilantro, finely chopped</li>
+      <li><b class="q" data-r="a" data-b="1">1</b> tbsp olive oil</li>
+      <li><b class="q" data-r="a" data-b="1">1</b> tbsp ice water <em>— skip this if you used garlic paste, it carries enough moisture already</em></li>
+      <li><b class="q" data-r="a" data-b="1">1</b> tsp salt · <b class="q" data-r="a" data-b="1">1</b> tsp black pepper</li>
+      <li><b class="q" data-r="a" data-b="2">2</b> tsp cumin · <b class="q" data-r="a" data-b="2">2</b> tsp paprika</li>
+      <li><b class="q" data-r="a" data-b="1">1</b> tsp allspice · <b class="q" data-r="a" data-b="1">1</b> tsp coriander · <b class="q" data-r="a" data-b="1">1</b> tsp garlic powder</li>
+      <li><b class="q" data-r="a" data-b="0.25">¼</b> tsp cinnamon</li>
+      <li><b class="q" data-r="a" data-b="4" data-i="1">4</b> pitas, cut in half</li>
+    </ul>
+
+    <p class="sub-h">Garlic tahini yogurt sauce</p>
+    <ul class="plainlist">
+      <li><b class="q" data-r="a" data-b="0.75">¾</b> cup Greek yogurt <em>— plain whole-milk yogurt or dahi works; strain it 30 min in a paper-towel-lined sieve</em></li>
+      <li><b class="q" data-r="a" data-b="0.25">¼</b> cup tahini</li>
+      <li><b class="q" data-r="a" data-b="3" data-i="1">3</b> garlic cloves, finely grated <em>— or <b class="q" data-r="a" data-b="2">2</b> tsp garlic paste; paste is milder raw, so go heavier here</em></li>
+      <li>Juice of <b class="q" data-r="a" data-b="0.5">½</b> lemon</li>
+      <li><b class="q" data-r="a" data-b="1">1</b> tbsp olive oil</li>
+      <li><b class="q" data-r="a" data-b="0.5">½</b> tsp salt · <b class="q" data-r="a" data-b="0.25">¼</b> tsp cumin</li>
+      <li><b class="q" data-r="a" data-b="2">2</b> tbsp parsley + <b class="q" data-r="a" data-b="2">2</b> tbsp cilantro, finely chopped</li>
+    </ul>
+
+    <p class="sub-h">To finish</p>
+    <ul class="plainlist">
+      <li>Olive oil mixed with minced garlic and parsley</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Method</h2>
+    <ol class="steps">
+      <li>Heat the oven to <strong>350&nbsp;°F</strong>. Do all the prep below before you touch the meat — once your hands are in it, you won't want to stop.</li>
+      <li><strong>Grate the onion.</strong> Use a small onion whole, or half a large one. Peel it, hold it by the root end and rub the cut face against the <strong>large holes of a box grater</strong> until you're down near your knuckles, then throw the stub away. It comes out as wet pulp, not shreds — that's right. Now scoop it into your hands over the sink and <strong>squeeze hard</strong> until it stops dripping. Keep the pulp, bin the juice. You should have roughly <strong>2–3 tbsp</strong> left. No grater? Chop it as fine as you can, wrap it in a paper towel and wring it out.</li>
+      <li><strong>Grate the jalapeño</strong> the same way, on the large holes. No need to squeeze this one.</li>
+      <li>In a large bowl, combine the beef with the squeezed onion, garlic, jalapeño, tomato paste, parsley, cilantro, olive oil and every spice. Mix with your hands until it's fully combined and slightly tacky — about a minute. Using garlic paste? Leave the ice water out.</li>
+      <li>Cut the pitas in half and gently open each pocket — microwave them a few seconds first so they don't tear. Spread a <strong>thin</strong> layer of meat inside each half, then brush the outside generously with olive oil.
+        <figure class="fig">
+          <svg viewBox="0 0 360 126" role="img" aria-label="A pita cut in half, the pocket opened, and a thin layer of meat spread inside">
+            <circle class="ln" cx="60" cy="50" r="31"/>
+            <line class="dsh" x1="60" y1="14" x2="60" y2="86"/>
+            <text class="lbl" x="60" y="110">cut in half</text>
+
+            <path class="ln" d="M 211 50 A 31 31 0 0 1 149 50 Z"/>
+            <path class="dsh" d="M 202 50 A 22 22 0 0 1 158 50"/>
+            <path class="ln" d="M 180 18 L 180 39"/>
+            <path class="ln" d="M 174 33 L 180 40 L 186 33"/>
+            <text class="lbl" x="180" y="110">open the pocket</text>
+
+            <path class="ln" d="M 331 50 A 31 31 0 0 1 269 50 Z"/>
+            <path class="ac" d="M 325 50 A 25 25 0 0 1 275 50"/>
+            <text class="lbl" x="300" y="110">thin layer only</text>
+          </svg>
+          <figcaption>Thicker than about ¼ inch and the pita burns before the middle cooks.</figcaption>
+        </figure>
+      </li>
+      <li>Heat a pan over medium. Cook meat-side down first for 1–2 minutes until charred, then flip and cook each pita side until golden and crisp.
+        <figure class="fig">
+          <svg viewBox="0 0 360 132" role="img" aria-label="Three searing positions: exposed meat edge down first, then each flat pita face">
+            <line class="ln" x1="18" y1="90" x2="102" y2="90"/>
+            <path class="ln" d="M 91 86 A 31 31 0 0 0 29 86 Z"/>
+            <path class="ac" d="M 32 86 L 88 86"/>
+            <text class="lbl" x="60" y="112">1 · meat edge down</text>
+            <text class="lbl-s" x="60" y="126">1–2 min, let it char</text>
+
+            <path class="ln" d="M 112 62 Q 124 48 136 62"/>
+            <path class="ln" d="M 131 56 L 136 63 L 129 65"/>
+
+            <line class="ln" x1="138" y1="90" x2="222" y2="90"/>
+            <path class="ln" d="M 149 80 Q 180 62 211 80 Q 180 90 149 80 Z"/>
+            <path class="ac" d="M 158 87 L 202 87"/>
+            <text class="lbl" x="180" y="112">2 · one flat face</text>
+            <text class="lbl-s" x="180" y="126">golden, not black</text>
+
+            <path class="ln" d="M 232 62 Q 244 48 256 62"/>
+            <path class="ln" d="M 251 56 L 256 63 L 249 65"/>
+
+            <line class="ln" x1="258" y1="90" x2="342" y2="90"/>
+            <path class="ln" d="M 269 80 Q 300 62 331 80 Q 300 90 269 80 Z"/>
+            <path class="ac" d="M 278 68 L 322 68"/>
+            <text class="lbl" x="300" y="112">3 · the other face</text>
+            <text class="lbl-s" x="300" y="126">then into the oven</text>
+          </svg>
+          <figcaption>Orange marks the side touching the pan. The cut edge goes first — that char is the whole point.</figcaption>
+        </figure>
+      </li>
+      <li>Move them to a sheet pan and finish in the oven for <strong>15 minutes</strong>, or until the meat hits <strong>155&nbsp;°F</strong> in the middle. All 8 halves fit on one pan.</li>
+      <li>While they're in the oven, whisk the yogurt, tahini, garlic, lemon juice, olive oil, salt, cumin and chopped herbs until smooth. If it's too thick to dip, loosen it with a spoonful of water at a time.</li>
+      <li>Brush the hot arayes with the garlic-parsley olive oil and serve with the sauce for dipping.</li>
+    </ol>
+  </section>
+
+  <section class="card tight">
+    <h2>Things that go wrong</h2>
+    <ul class="plainlist">
+      <li><strong>Squeeze the onion hard.</strong> Wet onion steams the meat and makes the pita soggy from the inside.</li>
+      <li><strong>Thin layer.</strong> Thicker than about ¼ inch and the pita burns before the center is cooked.</li>
+      <li>The ice water isn't optional-feeling nonsense — it keeps the mix juicy in a hot pan.</li>
+      <li>155&nbsp;°F is the target and it will carry over a few degrees while it rests.</li>
+    </ul>
+  </section>
+</div>
+
+<!-- ============ DUMPLINGS ============ -->
+<div class="panel" id="dump" hidden>
+  <figure class="hero">
+    <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Blanket dumplings in a dark skillet, topped with chili crisp, sliced green onion and sesame seeds">
+      <defs>
+        <linearGradient id="dbg" x1="0" y1="0" x2="0.2" y2="1">
+          <stop offset="0" stop-color="#282220"/><stop offset="1" stop-color="#100e0c"/>
+        </linearGradient>
+        <radialGradient id="dglow" cx="0.48" cy="0.38" r="0.66">
+          <stop offset="0" stop-color="#8a5f30" stop-opacity="0.45"/>
+          <stop offset="1" stop-color="#8a5f30" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="pan" x1="0" y1="0" x2="0.2" y2="1">
+          <stop offset="0" stop-color="#413b36"/><stop offset="1" stop-color="#211f1c"/>
+        </linearGradient>
+        <linearGradient id="dough" x1="0.15" y1="0" x2="0.65" y2="1">
+          <stop offset="0" stop-color="#f4e9d0"/><stop offset="0.55" stop-color="#ddcaa5"/><stop offset="1" stop-color="#b8a47c"/>
+        </linearGradient>
+        <linearGradient id="crisp" x1="0" y1="0" x2="0.3" y2="1">
+          <stop offset="0" stop-color="#e15c22"/><stop offset="1" stop-color="#8a1f08"/>
+        </linearGradient>
+        <g id="dmp">
+          <ellipse cx="2" cy="22" rx="46" ry="14" fill="#000" opacity="0.5"/>
+          <path d="M -44 4 C -48 -16 -30 -31 -10 -28 C -2 -37 14 -37 22 -27 C 42 -27 51 -8 44 8 C 38 23 16 31 -4 29 C -26 29 -41 19 -44 4 Z" fill="url(#dough)"/>
+          <g stroke="#ad986f" stroke-width="2" fill="none" opacity="0.65" stroke-linecap="round">
+            <path d="M -22 -21 C -14 -5 -12 12 -17 26"/>
+            <path d="M 3 -31 C 6 -9 4 11 0 29"/>
+            <path d="M 27 -25 C 31 -6 26 12 20 26"/>
+          </g>
+          <ellipse cx="-10" cy="-13" rx="19" ry="8" fill="#fffaf0" opacity="0.3"/>
+          <path d="M -44 4 C -48 -16 -30 -31 -10 -28 C -2 -37 14 -37 22 -27 C 42 -27 51 -8 44 8 C 38 23 16 31 -4 29 C -26 29 -41 19 -44 4 Z" fill="none" stroke="#8d7a56" stroke-width="1.5" opacity="0.5"/>
+        </g>
+      </defs>
+
+      <rect width="720" height="300" fill="url(#dbg)"/>
+      <rect width="720" height="300" fill="url(#dglow)"/>
+
+      <path d="M 596 146 L 706 124" stroke="#3a3531" stroke-width="18" stroke-linecap="round"/>
+      <ellipse cx="358" cy="158" rx="264" ry="131" fill="#575049"/>
+      <ellipse cx="358" cy="158" rx="252" ry="123" fill="url(#pan)"/>
+      <ellipse cx="358" cy="163" rx="229" ry="107" fill="#1b1917"/>
+      <ellipse cx="304" cy="212" rx="132" ry="36" fill="#d18f3c" opacity="0.13"/>
+      <ellipse cx="452" cy="118" rx="88" ry="26" fill="#d18f3c" opacity="0.08"/>
+
+      <use href="#dmp" transform="translate(250,118) rotate(-8) scale(0.93)"/>
+      <use href="#dmp" transform="translate(358,104) rotate(6) scale(0.96)"/>
+      <use href="#dmp" transform="translate(466,122) rotate(-4) scale(0.91)"/>
+      <use href="#dmp" transform="translate(524,182) rotate(-13) scale(0.86)"/>
+      <use href="#dmp" transform="translate(212,198) rotate(11) scale(0.89)"/>
+      <use href="#dmp" transform="translate(320,196) rotate(-6) scale(0.97)"/>
+      <use href="#dmp" transform="translate(428,200) rotate(8) scale(0.94)"/>
+
+      <g>
+        <g transform="translate(356,96) scale(0.95)">
+          <path d="M -27 1 q 8 -13 22 -9 q 15 -11 25 2 q 13 8 3 17 q -11 10 -27 6 q -19 -2 -23 -16 Z" fill="url(#crisp)"/>
+          <path d="M 11 15 q 7 11 -2 19" stroke="#a02b0c" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <circle cx="-11" cy="2" r="2.6" fill="#4f1103"/><circle cx="6" cy="-3" r="2.2" fill="#5e1806"/>
+          <circle cx="14" cy="8" r="2.4" fill="#4f1103"/><circle cx="-3" cy="9" r="2" fill="#5e1806"/>
+          <ellipse cx="-6" cy="-6" rx="9" ry="4" fill="#ff8c4a" opacity="0.4"/>
+        </g>
+        <g transform="translate(318,188) scale(1.05)">
+          <path d="M -27 1 q 8 -13 22 -9 q 15 -11 25 2 q 13 8 3 17 q -11 10 -27 6 q -19 -2 -23 -16 Z" fill="url(#crisp)"/>
+          <path d="M -14 16 q -5 12 3 19" stroke="#a02b0c" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <circle cx="-9" cy="4" r="2.6" fill="#4f1103"/><circle cx="8" cy="-4" r="2.2" fill="#5e1806"/>
+          <circle cx="16" cy="7" r="2.4" fill="#4f1103"/><circle cx="-1" cy="11" r="2" fill="#5e1806"/>
+          <ellipse cx="-4" cy="-6" rx="9" ry="4" fill="#ff8c4a" opacity="0.4"/>
+        </g>
+        <g transform="translate(466,112) scale(0.82)">
+          <path d="M -27 1 q 8 -13 22 -9 q 15 -11 25 2 q 13 8 3 17 q -11 10 -27 6 q -19 -2 -23 -16 Z" fill="url(#crisp)"/>
+          <circle cx="-10" cy="3" r="2.6" fill="#4f1103"/><circle cx="9" cy="-2" r="2.2" fill="#5e1806"/>
+          <circle cx="12" cy="9" r="2.4" fill="#4f1103"/>
+          <ellipse cx="-5" cy="-6" rx="9" ry="4" fill="#ff8c4a" opacity="0.4"/>
+        </g>
+      </g>
+
+      <g stroke="#57913a" stroke-width="1.6">
+        <circle cx="286" cy="150" r="6" fill="#9dd36c"/><circle cx="398" cy="134" r="5.4" fill="#8cc85e"/>
+        <circle cx="240" cy="160" r="5" fill="#9dd36c"/><circle cx="508" cy="128" r="5.6" fill="#8cc85e"/>
+        <circle cx="266" cy="228" r="5.8" fill="#9dd36c"/><circle cx="372" cy="228" r="5.2" fill="#8cc85e"/>
+        <circle cx="462" cy="236" r="6" fill="#9dd36c"/><circle cx="552" cy="206" r="5" fill="#8cc85e"/>
+        <circle cx="330" cy="142" r="4.6" fill="#8cc85e"/><circle cx="430" cy="166" r="5.4" fill="#9dd36c"/>
+        <circle cx="196" cy="186" r="5" fill="#8cc85e"/><circle cx="500" cy="180" r="4.8" fill="#9dd36c"/>
+        <circle cx="352" cy="252" r="4.6" fill="#8cc85e"/><circle cx="222" cy="134" r="4.8" fill="#9dd36c"/>
+      </g>
+
+      <g fill="#f5ecd8">
+        <ellipse cx="272" cy="136" rx="3.2" ry="2.1" transform="rotate(22 272 136)"/>
+        <ellipse cx="342" cy="126" rx="3.2" ry="2.1" transform="rotate(-14 342 126)"/>
+        <ellipse cx="410" cy="150" rx="3" ry="2" transform="rotate(40 410 150)"/>
+        <ellipse cx="486" cy="140" rx="3.2" ry="2.1" transform="rotate(-30 486 140)"/>
+        <ellipse cx="250" cy="216" rx="3.2" ry="2.1" transform="rotate(16 250 216)"/>
+        <ellipse cx="308" cy="234" rx="3" ry="2" transform="rotate(-24 308 234)"/>
+        <ellipse cx="396" cy="212" rx="3.2" ry="2.1" transform="rotate(52 396 212)"/>
+        <ellipse cx="444" cy="228" rx="3" ry="2" transform="rotate(-8 444 228)"/>
+        <ellipse cx="524" cy="156" rx="3.2" ry="2.1" transform="rotate(30 524 156)"/>
+        <ellipse cx="214" cy="164" rx="3" ry="2" transform="rotate(-44 214 164)"/>
+        <ellipse cx="366" cy="170" rx="3.2" ry="2.1" transform="rotate(10 366 170)"/>
+        <ellipse cx="540" cy="228" rx="3" ry="2" transform="rotate(-18 540 228)"/>
+        <ellipse cx="180" cy="210" rx="3" ry="2" transform="rotate(34 180 210)"/>
+        <ellipse cx="424" cy="118" rx="3" ry="2" transform="rotate(-36 424 118)"/>
+      </g>
+    </svg>
+  </figure>
+  <section class="card">
+    <h2>Blanket dumplings — beef filling</h2>
+    <ul class="plainlist">
+      <li><b class="q" data-r="d" data-b="1">1</b> lb ground beef (85/15)</li>
+      <li><b class="q" data-r="d" data-b="0.3333">⅓</b> cup green onions, thinly sliced</li>
+      <li><b class="q" data-r="d" data-b="1">1</b> tbsp fresh ginger, grated <em>— ginger paste swaps 1:1</em></li>
+      <li><b class="q" data-r="d" data-b="4" data-i="1">4</b> garlic cloves, minced <em>— or <b class="q" data-r="d" data-b="2">2</b> tsp garlic paste</em></li>
+      <li><b class="q" data-r="d" data-b="1">1</b> tbsp oyster sauce</li>
+      <li><b class="q" data-r="d" data-b="1">1</b> tsp black pepper</li>
+      <li><b class="q" data-r="d" data-b="2">2</b> tbsp chili crisp</li>
+      <li><b class="q" data-r="d" data-b="3">3</b> tbsp soy sauce</li>
+      <li><b class="q" data-r="d" data-b="1.5">1½</b> tsp sesame oil</li>
+      <li><b class="q" data-r="d" data-b="1">1</b> tbsp rice vinegar</li>
+      <li><b class="q" data-r="d" data-b="20" data-i="1">20</b> dumpling wrappers, plus a few spares for tears</li>
+      <li>¼ cup chicken broth <em>per skillet batch</em> — this one doesn't scale with the recipe</li>
+      <li>Avocado oil</li>
+    </ul>
+    <p class="sub-h">Topping</p>
+    <ul class="plainlist">
+      <li>Soy sauce · chili crisp · green onions · sesame seeds</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Method</h2>
+    <ol class="steps">
+      <li>In a bowl, combine the beef, green onions, ginger, garlic, oyster sauce, black pepper, chili crisp, soy sauce, sesame oil and rice vinegar. Mix <strong>just</strong> until it comes together — beef goes rubbery if you work it the way you worked the arayes.</li>
+      <li>Scoop mounds of filling onto a sheet pan — a rounded tablespoon each, spaced a couple of inches apart so you have room to work. Keep the wrappers under a damp paper towel while you go; they crack within minutes of hitting the air.</li>
+      <li>Lay a dumpling wrapper over each mound and pinch the edges around the filling to seal — that's the "blanket."
+        <figure class="fig">
+          <svg viewBox="0 0 360 126" role="img" aria-label="Scooping mounds of filling, draping a wrapper over each, then pinching the edges down">
+            <line class="ln" x1="16" y1="88" x2="104" y2="88"/>
+            <path class="ln" d="M 32 88 A 14 14 0 0 1 60 88"/>
+            <path class="ln" d="M 72 88 A 14 14 0 0 1 100 88"/>
+            <line class="dsh" x1="62" y1="80" x2="70" y2="80"/>
+            <text class="lbl" x="60" y="110">scoop mounds</text>
+
+            <line class="ln" x1="136" y1="88" x2="224" y2="88"/>
+            <path class="dsh" d="M 166 88 A 14 14 0 0 1 194 88"/>
+            <path class="ac" d="M 148 87 Q 180 48 212 87"/>
+            <path class="ln" d="M 180 20 L 180 40"/>
+            <path class="ln" d="M 174 34 L 180 41 L 186 34"/>
+            <text class="lbl" x="180" y="110">drape a wrapper</text>
+
+            <line class="ln" x1="256" y1="88" x2="344" y2="88"/>
+            <path class="ln" d="M 270 87 Q 300 50 330 87"/>
+            <path class="ac" d="M 262 88 l 5 -7 l 5 7 l 5 -7 l 5 7"/>
+            <path class="ac" d="M 318 88 l 5 -7 l 5 7 l 5 -7 l 5 7"/>
+            <text class="lbl" x="300" y="110">pinch it down</text>
+          </svg>
+          <figcaption>No folding or pleating. The wrapper is a blanket — you're just sealing it to the pan-side edge. Wet your fingertip along the rim first.</figcaption>
+        </figure>
+      </li>
+      <li>Drizzle with avocado oil, pour in the chicken broth, cover, and steam <strong>10 minutes</strong>, or until the beef reaches <strong>160&nbsp;°F</strong>. Move them to a wide skillet for this — a sheet pan can't hold a lid.
+        <figure class="fig">
+          <svg viewBox="0 0 360 150" role="img" aria-label="Shape the dumplings on a sheet pan, then transfer to a covered skillet with broth to steam">
+            <path class="ln" d="M 18 70 L 18 86 L 148 86 L 148 70"/>
+            <path class="ln" d="M 34 86 Q 46 68 58 86"/>
+            <path class="ln" d="M 71 86 Q 83 68 95 86"/>
+            <path class="ln" d="M 108 86 Q 120 68 132 86"/>
+            <text class="lbl" x="83" y="112">shape here</text>
+            <text class="lbl-s" x="83" y="126">sheet pan, room to work</text>
+
+            <path class="ln" d="M 166 78 L 192 78"/>
+            <path class="ln" d="M 185 72 L 192 78 L 185 84"/>
+
+            <path class="ln" d="M 210 60 L 210 82 Q 210 94 222 94 L 314 94 Q 326 94 326 82 L 326 60"/>
+            <path class="ln" d="M 326 66 L 346 62"/>
+            <path class="ln" d="M 228 88 Q 240 70 252 88"/>
+            <path class="ln" d="M 256 88 Q 268 70 280 88"/>
+            <path class="ln" d="M 284 88 Q 296 70 308 88"/>
+            <path class="dsh" d="M 216 88 L 320 88"/>
+            <path class="ln" d="M 202 60 Q 268 34 334 60"/>
+            <path class="ln" d="M 268 42 L 268 34"/>
+            <circle class="ln" cx="268" cy="31" r="4"/>
+            <path class="ac" d="M 244 66 q 5 -8 10 0 q 5 8 10 0"/>
+            <path class="ac" d="M 284 66 q 5 -8 10 0 q 5 8 10 0"/>
+            <text class="lbl" x="268" y="112">steam here</text>
+            <text class="lbl-s" x="268" y="126">¼ cup broth, lid on, 10 min</text>
+          </svg>
+          <figcaption>Dashed line is the broth level — it should sit well below the tops. They steam, they don't boil.</figcaption>
+        </figure>
+      </li>
+      <li>Top with soy sauce, chili crisp, green onions and sesame seeds. Serve with rice. Repeat for the remaining batches — fresh broth each time, and wipe the pan if it's gone sticky.</li>
+    </ol>
+  </section>
+
+  <section class="card tight">
+    <h2>Things that go wrong</h2>
+    <ul class="plainlist">
+      <li><strong>Beef instead of pork.</strong> It sets firmer and tastes leaner, so don't overmix it — stop as soon as it's combined, or you get a bouncy meatball texture. If your beef is leaner than 85/15, add a tablespoon of ice water to the filling.</li>
+      <li><strong>The pan, not the sheet pan.</strong> Step 4 needs a lid and a stovetop burner — use a wide skillet. A sheet pan is fine for scooping and shaping, then transfer.</li>
+      <li><strong>Keep wrappers under a damp towel.</strong> They dry out and crack in about two minutes of air.</li>
+      <li>Wet your fingertip and run it along the wrapper edge before pinching — it seals far better.</li>
+      <li>Don't crowd the pan. They swell, stick together, and tear when you lift them.</li>
+      <li>You can freeze them raw on the sheet pan, then bag them. Steam from frozen, add 3–4 minutes.</li>
+    </ul>
+  </section>
+</div>
+
+<!-- ============ PLAN ============ -->
+<div class="panel" id="plan" hidden>
+  <p class="note"><strong>Both in one night:</strong> roughly 70 minutes start to table. The arayes go in the oven and free up your hands for exactly the ten minutes the dumplings need.</p>
+
+  <section class="card">
+    <h2>Prep once, not twice</h2>
+    <ul class="plainlist">
+      <li><strong>Garlic paste instead of cloves?</strong> 1 tsp paste = 2 cloves. At your scale: 2½ tsp in the arayes meat, 2 tsp in the sauce, 1 tsp in the finishing oil, 4 tsp in the dumpling filling. About 3 tbsp all in. Ginger paste swaps 1:1.</li>
+      <li><strong>Garlic, fresh:</strong> peel them all at once. Grate for the arayes, mince for the dumplings and the finishing oil.</li>
+      <li><strong>Herbs:</strong> chop the whole parsley bunch and the whole cilantro bunch in one go, then portion. Parsley gets split three ways, cilantro two.</li>
+      <li><strong>Green onions:</strong> slice the whole bunch — ⅓ cup goes in the filling, the rest is topping.</li>
+      <li><strong>Box grater, large holes</strong> handles the onion and jalapeño. Squeeze the onion pulp dry over the sink and throw the liquid away — that step is what keeps the pita from going soggy.</li>
+      <li><strong>Yogurt:</strong> if you're using regular yogurt or dahi rather than Greek, set it to strain in a paper-towel-lined sieve the moment you start. Thirty minutes and it's Greek-thick.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Timeline</h2>
+    <ul class="timeline">
+      <li><span class="clock">0:00</span><span>Oven to 350&nbsp;°F. Do all the prep above.</span></li>
+      <li><span class="clock">0:15</span><span>Mix the arayes meat. Stuff and oil the pitas, set aside.</span></li>
+      <li><span class="clock">0:25</span><span>Mix the dumpling filling. Scoop mounds, lay on wrappers, pinch. Cover with a damp towel.</span></li>
+      <li><span class="clock">0:40</span><span>Sear the arayes in a pan, then move to the oven — 15 minutes.</span></li>
+      <li><span class="clock">0:45</span><span>Dumplings into the skillet: oil, broth, lid, 10 minutes.</span></li>
+      <li><span class="clock">0:48</span><span>Whisk the tahini yogurt sauce. Mix the garlic-parsley finishing oil.</span></li>
+      <li><span class="clock">0:55</span><span>Dumplings done at 160&nbsp;°F — top and hold.</span></li>
+      <li><span class="clock">0:57</span><span>Arayes out at 155&nbsp;°F. Brush with the garlic oil. Eat.</span></li>
+    </ul>
+  </section>
+
+  <section class="card tight">
+    <h2>Or split them across two nights</h2>
+    <ul class="plainlist">
+      <li>The arayes meat mixture keeps 2 days covered in the fridge and honestly improves overnight.</li>
+      <li>Assembled dumplings freeze raw on a sheet pan, then go in a bag — they'll keep a month and cook straight from frozen.</li>
+      <li>The tahini yogurt sauce keeps about 4 days. It thickens; loosen it with water.</li>
+      <li>Both recipes need a pan, a lid and an oven. Doing them on separate nights means one skillet, not two.</li>
+    </ul>
+  </section>
+</div>
+
+<!-- ============ WHERE ============ -->
+<div class="panel" id="where" hidden>
+  <p class="note"><strong>The run:</strong> Jetro first (it closes earliest), then Route 440 for the two things Jetro won't have, then Cairo Market only if you need better pita. Roughly a 6-mile loop.</p>
+
+  <section class="card">
+    <p class="stop">Stop 1 — the bulk of it</p>
+    <h2>Jetro<span class="dist">1 Amity St · about 1.2 mi south, 6 min drive</span></h2>
+    <p class="meta"><b>7 AM – 5 PM</b> Mon, Tue, Wed, Fri · to 6 PM Thursday · to 3 PM Saturday · <b>8 AM – 1 PM Sunday</b> · (201) 434-4334</p>
+    <ul class="buy">
+      <li><strong>Halal ground beef</strong> — the reason you're going. Sold in 5–10 lb chubs</li>
+      <li>All six spices — cumin, paprika, coriander, allspice, cinnamon, garlic powder, plus salt and black pepper</li>
+      <li>Olive oil and neutral oil, by the gallon tin</li>
+      <li>Soy sauce, oyster sauce, toasted sesame oil, rice vinegar</li>
+      <li>Sesame seeds, rice</li>
+      <li>Tahini — food-service tubs</li>
+      <li>Greek yogurt — large tub</li>
+      <li>Produce: onions, garlic, lemons, parsley, cilantro, green onions, ginger, jalapeño</li>
+      <li>Pita — check the bread section, but treat it as a maybe</li>
+    </ul>
+    <p class="meta"><b>Two cautions.</b> Pack sizes are wholesale: you need 2 tbsp of tomato paste and they sell #10 cans, and you need ¼ cup of broth per batch so a bouillon cube beats a case. And portion the beef into 1 lb packs and freeze the surplus the moment you get home.</p>
+  </section>
+
+  <section class="card">
+    <p class="stop">Stop 2 — the two things Jetro won't have</p>
+    <h2>Asian Food Market<span class="dist">701 Route 440 · 2.7 mi west of Jetro, 8 min</span></h2>
+    <p class="meta"><b>9 AM – 7:30 PM</b> Mon–Sat, 9–7 Sunday · (201) 333-8898 · 4.2★ from 1,284 reviews · large free lot</p>
+    <ul class="buy">
+      <li><strong>Dumpling wrappers</strong> — refrigerated case near the tofu. Check the label; a few brands use lard</li>
+      <li><strong>Chili crisp</strong> — Lao Gan Ma is pork-free and cheap. Read the jar on other brands</li>
+      <li>Top up here if Jetro was out of sesame oil, rice vinegar or oyster sauce</li>
+    </ul>
+    <p class="meta">Nothing else on your list needs this stop, so it's a fast in-and-out.</p>
+  </section>
+
+  <section class="card">
+    <p class="stop">Stop 3 — only if Jetro's pita disappoints</p>
+    <h2>Cairo Market<span class="dist">2833 JFK Blvd · 0.5 mi from your door, a 10 min walk</span></h2>
+    <p class="meta"><b>8 AM – 11:45 PM</b> daily, Sunday from 11 AM · (201) 297-0040 · 5.0★ from 38 reviews</p>
+    <p class="meta">Real pocket pita is the one item worth a dedicated trip — squeeze the bag, it should feel airy. They also carry tahini and the spices if anything at Jetro came up short. Open late enough that you can grab it the night before.</p>
+  </section>
+
+  <h2 style="margin:26px 0 10px">Alternatives, item by item</h2>
+
+  <section class="card tight">
+    <p class="stop">Halal ground beef</p>
+    <p class="meta"><b>Minar Halal Meat</b> · 771 Newark Ave · 10 AM – 8:30 PM · 4.6★ from 351 reviews — best-reviewed butcher near you, and they'll grind all 3 lb fresh while you wait. No membership, no bulk packs.</p>
+    <p class="meta"><b>Cairo Market butcher counter</b> — same trip as the pita, good record on freshness.</p>
+  </section>
+
+  <section class="card tight">
+    <p class="stop">Pocket pita and tahini</p>
+    <p class="meta"><b>Ghabour Brothers</b> · 867 Bergen Ave · 7 AM – 11 PM · 4.2★ from 141 reviews — two blocks south of Cairo, the backup if Cairo is out.</p>
+  </section>
+
+  <section class="card tight">
+    <p class="stop">Wrappers and chili crisp</p>
+    <p class="meta"><b>99 Ranch Market</b> · 420 Grand St · 9 AM – 9 PM · 4.3★ from 2,766 reviews — better stocked than the Route 440 store, but downtown parking. Only worth it if you're already near Grove Street.</p>
+  </section>
+
+  <section class="card tight">
+    <p class="stop">Spices, if you'd rather not buy Jetro-size jars</p>
+    <p class="meta"><b>Patel Brothers</b> · 780 Newark Ave · 9 AM – 9 PM · 4.0★ from 3,532 reviews — spices in bags, and cheap cilantro, parsley, ginger, jalapeño and garlic. Directly across the street from Minar, so one parking spot covers meat and spices both.</p>
+  </section>
+
+  <section class="card tight">
+    <p class="stop">If you'd rather do it in one stop</p>
+    <p class="meta"><b>ShopRite of Metro Plaza</b> · 400 Marin Blvd · 7 AM – 11 PM · 4.1★ from 5,313 reviews — covers everything except reliable pocket pita, and the wrappers are hit or miss. You'll pay more for tahini and chili crisp, but it's one line and no membership.</p>
+    <p class="meta"><b>Al Amana Hudson Halal</b> · 994 West Side Ave · 9 AM – 9 PM — 0.2 mi from you and walkable, fine for pantry gaps. Reviews are mixed on meat freshness, so buy the beef elsewhere.</p>
+  </section>
+
+  <section class="card tight">
+    <h2>One honest note</h2>
+    <p class="meta">Several halal markets in this stretch, including El Zaeem on Bergen and Al Amana on West Side, have repeated reviews about meat that smelled off. Jetro, Cairo and Minar are the ones with clean records. Whichever counter you use, look at the colour and smell it before you leave.</p>
+  </section>
+</div>
+
+<p class="footnote">Arayes and blanket dumplings, as written in the original posts, with quantities consolidated for a single shopping trip.</p>
+</div>
+
+<script>
+(function(){
+  var tabs = document.querySelectorAll('.tab');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(o){
+        o.setAttribute('aria-selected','false');
+        document.getElementById(o.dataset.panel).hidden = true;
+      });
+      t.setAttribute('aria-selected','true');
+      document.getElementById(t.dataset.panel).hidden = false;
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+
+  var SK = 'arayes-dumpling-scale-v2';
+  var pitas = 4, dumps = 20;
+  try {
+    var sv = JSON.parse(localStorage.getItem(SK) || 'null');
+    if (sv && sv.p && sv.d) { pitas = sv.p; dumps = sv.d; }
+  } catch(e){}
+
+  var FR = [[0.125,'⅛'],[0.25,'¼'],[1/3,'⅓'],[0.375,'⅜'],[0.5,'½'],[0.625,'⅝'],[2/3,'⅔'],[0.75,'¾'],[0.875,'⅞']];
+  function fmt(v){
+    if (v < 0.04) return '0';
+    var w = Math.floor(v + 1e-9), f = v - w;
+    if (f > 0.958) return String(w + 1);
+    if (f < 0.042) return String(w);
+    var best = null, bd = 0.07;
+    for (var i = 0; i < FR.length; i++){
+      var d = Math.abs(f - FR[i][0]);
+      if (d < bd){ bd = d; best = FR[i][1]; }
+    }
+    if (!best) return String(Math.round(v * 100) / 100);
+    return w ? w + best : best;
+  }
+
+  function render(){
+    var ma = pitas / 4, md = dumps / 20, halves = pitas * 2;
+
+    document.querySelectorAll('b.q').forEach(function(el){
+      var v = parseFloat(el.dataset.b) * (el.dataset.r === 'a' ? ma : md);
+      el.textContent = el.dataset.i ? String(Math.max(1, Math.round(v))) : fmt(v);
+    });
+
+    document.getElementById('a-val').textContent = pitas;
+    document.getElementById('d-val').textContent = dumps;
+    document.getElementById('a-sub').textContent = halves + ' halves · ' + fmt(ma) + ' lb beef';
+    document.getElementById('d-sub').textContent = fmt(md) + ' lb beef · ' + Math.ceil(dumps * 1.15) + ' wrappers with spares';
+
+    var spread = Math.min(halves, Math.floor(dumps / 5));
+    var mainA = Math.floor(halves / 2);
+    document.getElementById('feed1').innerHTML =
+      '<b>Served together</b>, figure one arayes half and five dumplings a head — that feeds about <b>' +
+      spread + ' people</b>. If the arayes is the centrepiece rather than a side, count two halves each and it stretches to <b>' +
+      mainA + '</b>.';
+
+    var searRounds = Math.ceil(halves / 4);
+    var steamRounds = Math.ceil(dumps / 13);
+    document.getElementById('feed2').innerHTML =
+      '<b>At the stove:</b> ' + searRounds + ' round' + (searRounds > 1 ? 's' : '') +
+      ' of searing (about 4 halves fit a 12-inch pan), then everything finishes on one sheet in the oven. Dumplings steam ' +
+      steamRounds + ' batch' + (steamRounds > 1 ? 'es' : '') + ' of roughly 13, 10 minutes each, ¼ cup broth per batch.';
+
+    var perBatch = Math.ceil(dumps / steamRounds);
+    put('ck-halves', String(halves));
+    put('ck-sear', searRounds === 1 ? 'One round' : (searRounds === 2 ? 'Two rounds' : searRounds + ' rounds'));
+    put('ck-per', String(perBatch));
+    put('ck-rest', steamRounds <= 1 ? 'That\u2019s all of them \u2014 one batch was enough'
+      : (steamRounds === 2 ? 'Run the second batch' : 'Run the remaining ' + (steamRounds - 1) + ' batches'));
+
+    var L = document.getElementById('scaled-list');
+    if (L) {
+      L.innerHTML =
+        '<li><strong>Ground beef 85/15 — ' + fmt(ma + md) + ' lb total</strong> (' + fmt(ma) + ' lb arayes, ' + fmt(md) + ' lb dumplings)</li>' +
+        '<li>Pocket pita — <strong>' + pitas + '</strong></li>' +
+        '<li>Dumpling wrappers — <strong>' + Math.ceil(dumps * 1.15) + '</strong> (spares included)</li>' +
+        '<li>Greek yogurt — ' + fmt(0.75 * ma) + ' cup · tahini — ' + fmt(0.25 * ma) + ' cup</li>' +
+        '<li>Garlic — about <strong>' + Math.ceil(8 * ma + 4 * md + 2) + ' cloves</strong> all in</li>' +
+        '<li>Parsley — ' + fmt(0.458 * ma) + ' cup chopped · cilantro — ' + fmt(0.375 * ma) + ' cup · green onions — ' + fmt(0.3333 * md) + ' cup plus topping</li>';
+    }
+    function put(id, txt){ var e = document.getElementById(id); if (e) e.textContent = txt; }
+    var heads = Math.ceil((8 * ma + 4 * md + 2) / 10);
+    var pBunch = Math.ceil(0.458 * ma / 0.5);
+    put('beef-qty', fmt(ma + md) + ' lb total \u2014 ' + fmt(ma) + ' lb arayes, ' + fmt(md) + ' lb dumplings. Don\u2019t go leaner than 85/15; the fat is what crisps the pita and keeps the filling from drying out.');
+    put('garlic-shop', Math.ceil(8 * ma + 4 * md + 2) + ' cloves all in \u2014 about ' + heads + ' head' + (heads > 1 ? 's' : ''));
+    put('parsley-shop', fmt(0.458 * ma) + ' cup chopped \u2014 buy ' + pBunch + ' large bunch' + (pBunch > 1 ? 'es' : ''));
+    put('scallion-shop', fmt(0.3333 * md) + ' cup sliced for the filling, plus more for topping');
+    put('yog-shop', fmt(0.75 * ma) + ' cup');
+    put('wrap-shop', Math.ceil(dumps * 1.15) + ' \u2014 round gyoza style, refrigerated case near the tofu, not the freezer. Spares included; they tear');
+    put('pita-shop', pitas + ' large \u2014 pocket pita, not pocketless flatbread. Squeeze the pack, it should feel airy');
+    put('soy-shop', fmt(3 * md) + ' tbsp in the filling, plus a drizzle on top');
+    put('crisp-shop', fmt(2 * md) + ' tbsp in the filling, plus spooning on top. Lao Gan Ma is the cheap classic, Fly By Jing the splurge');
+    put('tah-shop', fmt(0.25 * ma) + ' cup \u2014 stir the jar well before measuring');
+
+    try { localStorage.setItem(SK, JSON.stringify({p: pitas, d: dumps})); } catch(e){}
+  }
+
+  document.querySelectorAll('.sctl button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var d = parseInt(b.dataset.d, 10);
+      if (b.dataset.r === 'a') pitas = Math.min(24, Math.max(2, pitas + d));
+      else dumps = Math.min(120, Math.max(8, dumps + d));
+      render();
+    });
+  });
+  render();
+
+  // Ticks are keyed by stable item slugs, never by position or section, so
+  // restructuring the page leaves them untouched. LEGACY maps the original
+  // short keys forward so nothing ticked before the rename is lost.
+  var KEY = 'arayes-dumpling-list';
+  var LEGACY = {p1:'garlic',p2:'parsley',p3:'cilantro',p4:'green-onions',p5:'yellow-onion',
+    p6:'jalapeno',p7:'ginger',p8:'lemon',m1:'ground-beef',m2:'ground-beef',r1:'greek-yogurt',
+    r2:'dumpling-wrappers',b1:'pita',a1:'soy-sauce',a2:'chili-crisp',a3:'oyster-sauce',
+    a4:'sesame-oil',a5:'rice-vinegar',a6:'sesame-seeds',a7:'rice',n1:'tahini',n2:'tomato-paste',
+    n3:'olive-oil',n4:'avocado-oil',n5:'chicken-broth',s1:'cumin',s2:'paprika',s3:'allspice',
+    s4:'coriander',s5:'garlic-powder',s6:'cinnamon',s7:'black-pepper',s8:'salt'};
+
+  var boxes = document.querySelectorAll('input[type=checkbox][data-k]');
+  var state = {};
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) state = JSON.parse(raw) || {};
+  } catch(e){ state = {}; }
+
+  var migrated = false;
+  Object.keys(LEGACY).forEach(function(old){
+    if (state[old] === true && state[LEGACY[old]] !== true) { state[LEGACY[old]] = true; migrated = true; }
+  });
+  if (migrated) { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+  boxes.forEach(function(b){
+    if (state[b.dataset.k] === true) b.checked = true;
+    b.addEventListener('change', function(){
+      state[b.dataset.k] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+    });
+  });
+
+  document.getElementById('reset').addEventListener('click', function(){
+    if (!confirm('Uncheck every item on the shopping list?')) return;
+    boxes.forEach(function(b){ b.checked = false; });
+    state = {};
+    try { localStorage.removeItem(KEY); } catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
